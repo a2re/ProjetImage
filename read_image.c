@@ -6,20 +6,39 @@
 
 #include "rdjpeg.h"
 
-int main(int argc, char *argv[])
-{
-  int i,j,n,nx,ny,nb;
-  CIMAGE cim;
-  /*------------------------------------------------*/
-  /* lecture d'une image requête                    */
-  /*------------------------------------------------*/
-  read_cimage(argv[1],&cim);
-  /*------------------------------------------------*/
-  /* affichage des valeurs pour le premier bloc 8x8 */
-  /* comme exemple de traitement                    */
-  /*------------------------------------------------*/
-  printf("Largeur de l'image : %d\n",cim.nx);
-  printf("Heuteur de l'image : %d\n",cim.ny);
+#define BINS 4
+
+void histogram(CIMAGE cim) {
+  /* Declaration des variables */
+  int i, j, u, k;
+  float h[BINS * BINS * BINS];
+  
+  for (i = 0; i <  cim.nx ; i++) {
+    for (j = 0; j < cim.ny ; j++) {
+      int r = (int) (cim.r[i][j]*BINS)/256;
+      int g = (int) (cim.g[i][j]*BINS)/256;
+      int b = (int) (cim.b[i][j]*BINS)/256;
+
+      int k = r + (BINS * g) + (BINS * BINS * b);
+      h[k] += 1.0;
+    }
+  }
+  
+  k = 0;
+  for (u = 0 ; u < BINS; u++) {
+    for (j = 0 ; j < BINS; j++) {
+      for (i = 0 ; i < BINS; i++) {
+        printf("%f ", h[k] / ((float) cim.nx*cim.ny));
+        k++;
+      }
+      printf("\n");
+    }
+    printf("\n");
+  }
+}
+
+void display_image_colors(CIMAGE cim) {
+  int i,j;
   printf("Plan rouge du premier bloc 8x8 :\n");
   for (j = 0; j < 8; j++) {       /* ligne par ligne */
     printf("  ");
@@ -44,7 +63,24 @@ int main(int argc, char *argv[])
     }
     printf("\n");
   }
-  /*------------------------------------------------*/
+}
 
+int main(int argc, char *argv[])
+{
+  CIMAGE cim;
+  /*------------------------------------------------*/
+  /* lecture d'une image requÃªte                    */
+  /*------------------------------------------------*/
+  read_cimage(argv[1],&cim);
+  /*------------------------------------------------*/
+  /* affichage des valeurs pour le premier bloc 8x8 */
+  /* comme exemple de traitement                    */
+  /*------------------------------------------------*/
+  printf("Largeur de l'image : %d\n",cim.nx);
+  printf("Heuteur de l'image : %d\n",cim.ny);
+  
+  //display_image_colors(cim);
+  histogram(cim);
+  /*------------------------------------------------*/
   exit(0);
 }
