@@ -11,7 +11,7 @@
 void histogram(CIMAGE cim) {
   /* Declaration des variables */
   int i, j, u, k;
-  float h[BINS * BINS * BINS];
+  float h[BINS * BINS * BINS], hist;
   
   for (i = 0; i <  cim.nx ; i++) {
     for (j = 0; j < cim.ny ; j++) {
@@ -28,7 +28,12 @@ void histogram(CIMAGE cim) {
   for (u = 0 ; u < BINS; u++) {
     for (j = 0 ; j < BINS; j++) {
       for (i = 0 ; i < BINS; i++) {
-        printf("%f ", h[k] / ((float) cim.nx*cim.ny));
+       hist = (float)(h[k] / (cim.nx*cim.ny)) ;
+        if(hist <= 0) // hist == -0.0 negative float zero
+	      {
+	        	hist = 0;  // which equals to zero	
+      	}
+        printf("%f ", hist);
         k++;
       }
       printf("\n");
