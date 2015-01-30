@@ -9,76 +9,85 @@
 #define BINS 4
 
 void histogram(CIMAGE cim) {
-  /* Declaration des variables */
-  int i, j, u, k;
-  float h[BINS * BINS * BINS] = {};
-  for (i = 0; i <  cim.nx ; i++) {
-    for (j = 0; j < cim.ny ; j++) {
-      int r = (int) (cim.r[i][j]*BINS)/256;
-      int g = (int) (cim.g[i][j]*BINS)/256;
-      int b = (int) (cim.b[i][j]*BINS)/256;
-      int k = r + (BINS * g) + (BINS * BINS * b);
-      h[k] += 1.0;
+    /* Declaration des variables */
+    int i, j, u, k;
+    float h[BINS * BINS * BINS] = {};
+    for (i = 0; i <  cim.nx ; i++) {
+        for (j = 0; j < cim.ny ; j++) {
+            int r = (int) (cim.r[i][j]*BINS)/256;
+            int g = (int) (cim.g[i][j]*BINS)/256;
+            int b = (int) (cim.b[i][j]*BINS)/256;
+            int k = r + (BINS * g) + (BINS * BINS * b);
+            h[k] += 1.0;
+        }
     }
-  }
-  
-  k = 0;
-  for (u = 0 ; u < BINS; u++) {
-    for (j = 0 ; j < BINS; j++) {
-      for (i = 0 ; i < BINS; i++) {
-        printf("%f ", (float)(h[k] / (cim.nx*cim.ny)));
-        k++;
-      }
-      printf("\n");
+ 
+    for(k = 0; k < BINS*BINS*BINS; i++) {
+        h[k] = (float)(h[k] / (cim.nx*cim.ny));
     }
-    printf("\n");
-  }
+    
+    k = 0;
+    for (u = 0 ; u < BINS; u++) {
+        for (j = 0 ; j < BINS; j++) {
+            for (i = 0 ; i < BINS; i++) {
+                printf("%f ", h[k]);
+                k++;
+            }
+            printf("\n");
+        }
+        printf("\n");
+    }
+    
+    FILE* file = NULL;
+    if((file = fopen("hist.svm", "w+")) != NULL) {
+    } else {
+    printf("Impossible d'ouvrir le fichier hist.svm !");
+    }
 }
 
 void display_image_colors(CIMAGE cim) {
-  int i,j;
-  printf("Plan rouge du premier bloc 8x8 :\n");
-  for (j = 0; j < 8; j++) {       /* ligne par ligne */
-    printf("  ");
-    for (i = 0; i < 8; i++) {   /* pixel par pixel */
-      printf("%4d",cim.r[i][j]);
+    int i,j;
+    printf("Plan rouge du premier bloc 8x8 :\n");
+    for (j = 0; j < 8; j++) {       /* ligne par ligne */
+        printf("  ");
+        for (i = 0; i < 8; i++) {   /* pixel par pixel */
+            printf("%4d",cim.r[i][j]);
+        }
+        printf("\n");
     }
-    printf("\n");
-  }
-  printf("Plan vert du premier bloc 8x8 :\n");
-  for (j = 0; j < 8; j++) {       /* ligne par ligne */
-    printf("  ");
-    for (i = 0; i < 8; i++) {   /* pixel par pixel */
-      printf("%4d",cim.g[i][j]);
+    printf("Plan vert du premier bloc 8x8 :\n");
+    for (j = 0; j < 8; j++) {       /* ligne par ligne */
+        printf("  ");
+        for (i = 0; i < 8; i++) {   /* pixel par pixel */
+            printf("%4d",cim.g[i][j]);
+        }
+        printf("\n");
     }
-    printf("\n");
-  }
-  printf("Plan bleu du premier bloc 8x8 :\n");
-  for (j = 0; j < 8; j++) {       /* ligne par ligne */
-    printf("  ");
-    for (i = 0; i < 8; i++) {   /* pixel par pixel */
-      printf("%4d",cim.b[i][j]);
+    printf("Plan bleu du premier bloc 8x8 :\n");
+    for (j = 0; j < 8; j++) {       /* ligne par ligne */
+        printf("  ");
+        for (i = 0; i < 8; i++) {   /* pixel par pixel */
+            printf("%4d",cim.b[i][j]);
+        }
+        printf("\n");
     }
-    printf("\n");
-  }
 }
 
-int main(int argc, char *argv[])
-{
-  CIMAGE cim;
-  /*------------------------------------------------*/
-  /* lecture d'une image requête                    */
-  /*------------------------------------------------*/
-  read_cimage(argv[1],&cim);
-  /*------------------------------------------------*/
-  /* affichage des valeurs pour le premier bloc 8x8 */
-  /* comme exemple de traitement                    */
-  /*------------------------------------------------*/
-  printf("Largeur de l'image : %d\n",cim.nx);
-  printf("Heuteur de l'image : %d\n",cim.ny);
-  
-  //display_image_colors(cim);
-  histogram(cim);
-  /*------------------------------------------------*/
-  exit(0);
+int main(int argc, char *argv[]) {
+    CIMAGE cim;
+    /*------------------------------------------------*/
+    /* lecture d'une image requête                    */
+    /*------------------------------------------------*/
+    read_cimage(argv[1],&cim);
+    /*------------------------------------------------*/
+    /* affichage des valeurs pour le premier bloc 8x8 */
+    /* comme exemple de traitement                    */
+    /*------------------------------------------------*/
+    printf("Largeur de l'image : %d\n",cim.nx);
+    printf("Heuteur de l'image : %d\n",cim.ny);
+    
+    //display_image_colors(cim);
+    histogram(cim);
+    /*------------------------------------------------*/
+    exit(0);
 }
