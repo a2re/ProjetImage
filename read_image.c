@@ -7,10 +7,10 @@
 
 #define BINS 4
 
-void histogram(CIMAGE cim) {
+float * get_image_histogram(CIMAGE cim) {
     /* Declaration des variables */
-    int i, j, u, k;
-    float h[BINS * BINS * BINS] = {};
+    int i, j, k;
+    static float h[BINS * BINS * BINS] = {};
     for (i = 0; i <  cim.nx ; i++) {
         for (j = 0; j < cim.ny ; j++) {
             int r = (int) (cim.r[i][j]*BINS)/256;
@@ -25,28 +25,39 @@ void histogram(CIMAGE cim) {
     for(i = 0; i < BINS * BINS * BINS; i++) {
         h[i] = (float)(h[i] / (cim.nx*cim.ny));
     }
+    return h;
+}
+
+void display_image_histogram(CIMAGE cim) {
+    int i,j,u,k;
     
-    //
+    float *h;
+    h = get_image_histogram(cim);
     k = 0;
     for (u = 0 ; u < BINS; u++) {
         for (j = 0 ; j < BINS; j++) {
             for (i = 0 ; i < BINS; i++) {
-                printf("%f ", h[k]);
+                printf("%f ", *(h + k));
                 k++;
             }
             printf("\n");
         }
         printf("\n");
-    }
-    
+    }    
+}
+
+void display_image_libsvm(CIMAGE cim) {
+    int i;
+    float *h;
+    h = get_image_histogram(cim);
     /*------------------------ Format libsvm ---------------------------*/
-    printf("Format libsvm de l'image :\n---------------------------------------------------------------------------------\n0");
+    printf("Format libsvm de l'image :\n\n0");
     for (i = 0; i < BINS * BINS * BINS; i++){
-        if (h[i] != 0) printf(" %d:%f", i+1, h[i]);
+        if (h[i] != 0) printf(" %d:%f", i+1, *(h + i));
     }
     printf("\n---------------------------------------------------------------------------------\n");
-    
 }
+
 void display_image_colors(CIMAGE cim) {
     int i,j;
     printf("Plan rouge du premier bloc 8x8 :n");
@@ -87,7 +98,8 @@ int main(int argc, char *argv[]) {
     printf("Largeur de l'image : %d\n",cim.nx);
     printf("Hauteur de l'image : %d\n",cim.ny);
     //display_image_colors(cim);
-    histogram(cim);
+    //display_image_histogram(cim);
+    display_image_libsvm(cim);
     /*------------------------------------------------*/
     exit(0);
 }

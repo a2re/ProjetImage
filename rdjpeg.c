@@ -11,7 +11,7 @@ void read_cimage(char *name, CIMAGE *cim)
   FILE *fp;
   /*-------------------------------------------------*/
   /* commande conversion vers le format PPM          */
-  /* djpeg envoie le résultat sur la sortie standard */  
+  /* djpeg envoie le rÃ©sultat sur la sortie standard */  
   /*-------------------------------------------------*/  
   if (strstr(name,"http://") == name) {
     asprintf(&command,"wget -O - \"%s\" -o /dev/null | bin/djpeg ",name);
@@ -54,9 +54,18 @@ void read_cimage(char *name, CIMAGE *cim)
         r[i][j] = g[i][j] = b[i][j] = (unsigned char) getc(fp);
       }
     }
-  } else { /* format non supporté */
+  } else { /* format non supportÃ© */
     exit(1);
   }
   pclose(fp);
 }
 
+void free_cimage(char *name, CIMAGE *cim)
+{
+  /*free(*r);
+  free(*g);
+  free(*b);*/
+  free((*cim).r);
+  free((*cim).g);
+  free((*cim).b);
+}
