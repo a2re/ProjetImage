@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-
 #include "rdjpeg.h"
 
 #define BINS 4
@@ -21,11 +20,13 @@ void histogram(CIMAGE cim) {
             h[k] += 1.0;
         }
     }
- 
-    for(k = 0; k < BINS*BINS*BINS; i++) {
-        h[k] = (float)(h[k] / (cim.nx*cim.ny));
+    
+    /*--------------------- Normalisation --------------------------*/
+    for(i = 0; i < BINS * BINS * BINS; i++) {
+        h[i] = (float)(h[i] / (cim.nx*cim.ny));
     }
     
+    //
     k = 0;
     for (u = 0 ; u < BINS; u++) {
         for (j = 0 ; j < BINS; j++) {
@@ -38,16 +39,17 @@ void histogram(CIMAGE cim) {
         printf("\n");
     }
     
-    FILE* file = NULL;
-    if((file = fopen("hist.svm", "w+")) != NULL) {
-    } else {
-    printf("Impossible d'ouvrir le fichier hist.svm !");
+    /*------------------------ Format libsvm ---------------------------*/
+    printf("Format libsvm de l'image :\n---------------------------------------------------------------------------------\n0");
+    for (i = 0; i < BINS * BINS * BINS; i++){
+        if (h[i] != 0) printf(" %d:%f", i+1, h[i]);
     }
+    printf("\n---------------------------------------------------------------------------------\n");
+    
 }
-
 void display_image_colors(CIMAGE cim) {
     int i,j;
-    printf("Plan rouge du premier bloc 8x8 :\n");
+    printf("Plan rouge du premier bloc 8x8 :n");
     for (j = 0; j < 8; j++) {       /* ligne par ligne */
         printf("  ");
         for (i = 0; i < 8; i++) {   /* pixel par pixel */
@@ -55,7 +57,7 @@ void display_image_colors(CIMAGE cim) {
         }
         printf("\n");
     }
-    printf("Plan vert du premier bloc 8x8 :\n");
+    printf("Plan vert du premier bloc 8x8 :n");
     for (j = 0; j < 8; j++) {       /* ligne par ligne */
         printf("  ");
         for (i = 0; i < 8; i++) {   /* pixel par pixel */
@@ -63,7 +65,7 @@ void display_image_colors(CIMAGE cim) {
         }
         printf("\n");
     }
-    printf("Plan bleu du premier bloc 8x8 :\n");
+    printf("Plan bleu du premier bloc 8x8 :n");
     for (j = 0; j < 8; j++) {       /* ligne par ligne */
         printf("  ");
         for (i = 0; i < 8; i++) {   /* pixel par pixel */
@@ -72,7 +74,6 @@ void display_image_colors(CIMAGE cim) {
         printf("\n");
     }
 }
-
 int main(int argc, char *argv[]) {
     CIMAGE cim;
     /*------------------------------------------------*/
@@ -84,8 +85,7 @@ int main(int argc, char *argv[]) {
     /* comme exemple de traitement                    */
     /*------------------------------------------------*/
     printf("Largeur de l'image : %d\n",cim.nx);
-    printf("Heuteur de l'image : %d\n",cim.ny);
-    
+    printf("Hauteur de l'image : %d\n",cim.ny);
     //display_image_colors(cim);
     histogram(cim);
     /*------------------------------------------------*/
