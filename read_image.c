@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
     /*------------------------------------------------*/
     /* lecture d'une image requête                    */
     /*------------------------------------------------*/
-    read_cimage(argv[1],&cim);
+    read_cimage(argv[1], &cim);
     /*------------------------------------------------*/
     /* affichage des valeurs pour le premier bloc 8x8 */
     /* comme exemple de traitement                    */
@@ -101,6 +101,7 @@ int main(int argc, char *argv[]) {
     //display_image_colors(cim);
     //display_image_histogram(cim);
     display_image_libsvm(cim);
+    free_cimage(argv[1], &cim);
     /*------------------------------------------------*/
     exit(0);
 }
