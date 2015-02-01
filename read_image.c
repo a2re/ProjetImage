@@ -28,6 +28,34 @@ float * get_image_histogram(CIMAGE cim) {
     return h;
 }
 
+void display_image_colors(CIMAGE cim) {
+    int i,j;
+    printf("Plan rouge du premier bloc 8x8 :n");
+    for (j = 0; j < 8; j++) {       /* ligne par ligne */
+        printf("  ");
+        for (i = 0; i < 8; i++) {   /* pixel par pixel */
+            printf("%4d",cim.r[i][j]);
+        }
+        printf("\n");
+    }
+    printf("Plan vert du premier bloc 8x8 :n");
+    for (j = 0; j < 8; j++) {       /* ligne par ligne */
+        printf("  ");
+        for (i = 0; i < 8; i++) {   /* pixel par pixel */
+            printf("%4d",cim.g[i][j]);
+        }
+        printf("\n");
+    }
+    printf("Plan bleu du premier bloc 8x8 :n");
+    for (j = 0; j < 8; j++) {       /* ligne par ligne */
+        printf("  ");
+        for (i = 0; i < 8; i++) {   /* pixel par pixel */
+            printf("%4d",cim.b[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 void display_image_histogram(CIMAGE cim) {
     int i,j,u,k;
     
@@ -58,33 +86,6 @@ void display_image_libsvm(CIMAGE cim) {
     printf("\n---------------------------------------------------------------------------------\n");
 }
 
-void display_image_colors(CIMAGE cim) {
-    int i,j;
-    printf("Plan rouge du premier bloc 8x8 :n");
-    for (j = 0; j < 8; j++) {       /* ligne par ligne */
-        printf("  ");
-        for (i = 0; i < 8; i++) {   /* pixel par pixel */
-            printf("%4d",cim.r[i][j]);
-        }
-        printf("\n");
-    }
-    printf("Plan vert du premier bloc 8x8 :n");
-    for (j = 0; j < 8; j++) {       /* ligne par ligne */
-        printf("  ");
-        for (i = 0; i < 8; i++) {   /* pixel par pixel */
-            printf("%4d",cim.g[i][j]);
-        }
-        printf("\n");
-    }
-    printf("Plan bleu du premier bloc 8x8 :n");
-    for (j = 0; j < 8; j++) {       /* ligne par ligne */
-        printf("  ");
-        for (i = 0; i < 8; i++) {   /* pixel par pixel */
-            printf("%4d",cim.b[i][j]);
-        }
-        printf("\n");
-    }
-}
 int main(int argc, char *argv[]) {
     CIMAGE cim;
     /*------------------------------------------------*/
