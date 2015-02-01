@@ -1,0 +1,4 @@
+#!/bin/sh
+for line in $(cat $1); do
+    ./read_image $line
+done
