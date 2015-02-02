@@ -30,6 +30,12 @@ float * get_image_histogram(CIMAGE cim) {
 
 void display_image_colors(CIMAGE cim) {
     int i,j;
+    /*------------------------------------------------*/
+    /* affichage des valeurs pour le premier bloc 8x8 */
+    /* comme exemple de traitement                    */
+    /*------------------------------------------------*/
+    printf("Largeur de l'image : %d\n",cim.nx);
+    printf("Hauteur de l'image : %d\n",cim.ny);
     printf("Plan rouge du premier bloc 8x8 :n");
     for (j = 0; j < 8; j++) {       /* ligne par ligne */
         printf("  ");
@@ -79,11 +85,11 @@ void display_image_libsvm(CIMAGE cim) {
     float *h;
     h = get_image_histogram(cim);
     /*------------------------ Format libsvm ---------------------------*/
-    printf("Format libsvm de l'image :\n\n0");
+    printf("0");
     for (i = 0; i < BINS * BINS * BINS; i++){
         if (h[i] != 0) printf(" %d:%f", i+1, *(h + i));
     }
-    printf("\n---------------------------------------------------------------------------------\n");
+    printf("\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -92,12 +98,6 @@ int main(int argc, char *argv[]) {
     /* lecture d'une image requête                    */
     /*------------------------------------------------*/
     read_cimage(argv[1], &cim);
-    /*------------------------------------------------*/
-    /* affichage des valeurs pour le premier bloc 8x8 */
-    /* comme exemple de traitement                    */
-    /*------------------------------------------------*/
-    printf("Largeur de l'image : %d\n",cim.nx);
-    printf("Hauteur de l'image : %d\n",cim.ny);
     //display_image_colors(cim);
     //display_image_histogram(cim);
     display_image_libsvm(cim);
