@@ -1,0 +1,4 @@
+*.o
+~*
+read_image
+.idea/
