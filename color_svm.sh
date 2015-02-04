@@ -13,9 +13,7 @@ for line in `cat $1`; do
     	 echo "$line"
      fi      
      count=$(($count+1))
-
-done 
-
+done
 }
 
 for line in `cat $annofile`; do
@@ -38,7 +36,6 @@ for line in `cat $filename`; do
     
      echo "$val$res">>train/color_aeroplane.svm
      count=$(($count+1))
-     
 done
 
 rm annotation.txt
