@@ -45,5 +45,5 @@ for line in `cat $filename`; do
      count=$(($count+1))
 done
 
-rm annotation.txt
+
 
