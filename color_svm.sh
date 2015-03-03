@@ -1,49 +1,15 @@
-#!/bin/sh
-filename=$2 
-search_dir=$1
+#!/bin/bash
 
+for line in $(ls train/ann); do
 
-i=0
+    ann=$( echo $line | cut -d"." -f1 )
+    bash test_ann.sh train/svm/color.svm train/ann/$line > train/svm/color_$ann.svm
 
-get_annotation () {
-count=0 
-for line in `cat $1`; do
-          
-     if [ $count == $2 ]
-     then
-    	 echo "$line"
-     fi      
-     count=$(($count+1))
-done
-}
-ls $search_dir | grep '.ann' | sed 's/.ann//g' > anno_name.txt 
-
-for annofile in `cat anno_name.txt`; do
-	for line in `cat search_dir/$annofile.ann`; do
-	     val=`expr $i % 2`
-	     
-	     if [ $val == 1 ]
-	     then
-	    	 echo "$line"
-	     fi      
-	     i=$(($i+1))
-
-	done > temp/$annofile.txt
 done
 
+for line in $(ls val/ann); do
 
-count=0
-for line in `cat $filename`; do
-     echo "$line \n"
-     
-     res=$(./read_image $line)
-     for annofile in `cat anno_name.txt`; do
-	val=$(get_annotation "temp/$annofile.txt" $count)	
-	echo "$val$res">>train/color_$annofile.svm
-	
-     done
-     count=$(($count+1))
+    ann=$( echo $line | cut -d"." -f1 )
+    bash test_ann.sh val/svm/color.svm val/ann/$line > val/svm/color_$ann.svm
+
 done
-
-
-

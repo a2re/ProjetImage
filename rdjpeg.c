@@ -6,7 +6,17 @@ void read_cimage(char *name, CIMAGE *cim)
   /* lecture d'une image couleur */
   /*-----------------------------*/
   int i,j,nx,ny,nc;
-  unsigned char **r,**g,**b;
+  unsigned char **r,**g,*
+  /*-----------------------------------*/
+  if ((fp = popen(command,"r")) == NULL) {
+    fprintf(stderr,"Can't open PBM file from \"%s\" command, exiting",command);
+    exit(1);
+  }
+  free(command);
+  fscanf(fp,"%s\n%d %d\n%d\n",head,&nx,&ny,&nc);
+  (*cim).nx = nx;
+  (*cim).ny = ny;
+  (*cim).r = r = (unsigned char **) malloc(nx*siz*b;
   char *command,head[4];
   FILE *fp;
   /*-------------------------------------------------*/
@@ -19,17 +29,7 @@ void read_cimage(char *name, CIMAGE *cim)
     asprintf(&command,"bin/djpeg \"%s\"",name);
   }
   /*-----------------------------------*/
-  /* lecture d'une image au format PPM */
-  /*-----------------------------------*/
-  if ((fp = popen(command,"r")) == NULL) {
-    fprintf(stderr,"Can't open PBM file from \"%s\" command, exiting",command);
-    exit(1);
-  }
-  free(command);
-  fscanf(fp,"%s\n%d %d\n%d\n",head,&nx,&ny,&nc);
-  (*cim).nx = nx;
-  (*cim).ny = ny;
-  (*cim).r = r = (unsigned char **) malloc(nx*sizeof(unsigned char *));
+  /* lecture d'une image au format PPM */eof(unsigned char *));
   (*cim).g = g = (unsigned char **) malloc(nx*sizeof(unsigned char *));
   (*cim).b = b = (unsigned char **) malloc(nx*sizeof(unsigned char *));
   r[0] = (unsigned char *) malloc(nx*ny*sizeof(unsigned char));
