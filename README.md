@@ -8,3 +8,6 @@ Génération du modèle color_aeroplane.svm: <br>
 <br>
 Génération de color_aeroplane.out : <br>
 ./libsvm/svm-predict -b 1 val/svm/color.svm model/color_aeroplane.model out/color_aeroplane.out
+<br>
+Génération de color_all.top : <br>
+cat val/top/* > val/top/color_top.top
