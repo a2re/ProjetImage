@@ -1,14 +1,8 @@
 #!/bin/bash
 
-if [ ! -d "train/sift/" ]; then
-	echo "Création du dossier sift"
-	mkdir "train/sift"
-fi
+rm -R "train/sift"
+mkdir "train/sift"
 
-for line in $(ls /home/m/mulhemp/sift/train); do
-	
-	if [ $line != "1nn" ]; then
-    	bash test_sift.sh $line
-    fi
-
+for line in $(ls /home/m/mulhemp/sift/train/*.sift | cut -d / -f 7-); do	
+	bash test_sift.sh $line
 done

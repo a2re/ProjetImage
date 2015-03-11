@@ -1,9 +1,8 @@
 #!/bin/bash
 
-for line in $(ls /home/m/mulhemp/sift/train); do
-	
-	if [ $line != "1nn" ]; then
-    	bash test_sift.sh $line
-    fi
+rm -R "train/sift"
+mkdir "train/sift"
 
+for line in $(ls /home/m/mulhemp/sift/train/*.sift); do	
+	bash test_sift.sh $line
 done
