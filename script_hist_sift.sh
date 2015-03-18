@@ -11,7 +11,7 @@ do
 
 		name=$( basename $sift )
 
-		for i in `seq 0 255`; do
+		for i in `seq 0 256`; do
 		    v[$i]=0;
 	    done
 
@@ -20,10 +20,13 @@ do
 		done
 
 		output=$(echo $name | cut -d "." -f 1)
-		for i in `seq 0 255`; do
+		
+		echo -n "0" >> "$f/hist/$output.hist"
+		
+		for i in `seq 0 256`; do
 			if [ $[v[$i]] -ne "0" ]
 			then
-				echo $[ v[$i] ] >> "$f/hist/$output.hist"
+				echo -n " $i:$[v[$i]]" >> "$f/hist/$output.hist"
 			fi
 		done
 	done

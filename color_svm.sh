@@ -1,15 +1,10 @@
 #!/bin/bash
+for f in 'train' 'val'
+do
+	for line in $(ls train/ann); do
 
-for line in $(ls train/ann); do
+	    ann=$( echo $line | cut -d"." -f1 )
+	    bash test_ann.sh `$f`/svm/color.svm train/ann/$line > `$f`/svm/color_$ann.svm
 
-    ann=$( echo $line | cut -d"." -f1 )
-    bash test_ann.sh train/svm/color.svm train/ann/$line > train/svm/color_$ann.svm
-
-done
-
-for line in $(ls val/ann); do
-
-    ann=$( echo $line | cut -d"." -f1 )
-    bash test_ann.sh val/svm/color.svm val/ann/$line > val/svm/color_$ann.svm
-
+	done
 done
