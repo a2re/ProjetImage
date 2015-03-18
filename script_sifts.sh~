@@ -1,8 +1,0 @@
-#!/bin/bash
-
-rm -R "train/sift"
-mkdir "train/sift"
-
-for line in $(ls /home/m/mulhemp/sift/train/*.sift); do	
-	bash test_sift.sh $line
-done
