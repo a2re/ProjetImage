@@ -2,7 +2,7 @@
 
 mkdir train/hist
 
-for sift in $(ls train/1nn/*.sift); do
+for sift in $(ls train/sift/1nn/*.sift); do
 
     echo "Traitrement de $sift"
 
