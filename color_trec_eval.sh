@@ -1,13 +1,14 @@
 #!/bin/bash
 
-for line in $(ls val/rel); do
+echo "Traitement du fichier top :"
+./libsvm/trec_eval -q -m map val/rel/all.rel top/color_all.top
 
-    name=$( echo $line | cut -d "." -f1 )
+for name in $(cat concepts.txt); do
+	
+	echo "Traitement de $name: "
 
-    echo "trec_eval $name: "
+	./libsvm/trec_eval -q -m map val/rel/$name.rel top/color_$name.top
 
-    ./libsvm/trec_eval -q -m map val/rel/$name.rel val/top/color_$name.top
-
-    echo ""
+	echo ""
 
 done

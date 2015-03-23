@@ -1,9 +1,13 @@
 #!/bin/sh
-mkdir val/top
-for line in $(ls val/ann); do
 
-    name=$( echo $line | cut -d"." -f1 )
+rm -R top
+mkdir top
 
-    bash test_top.sh val/ann/$name.ann val/out/color_$name.out > val/top/color_$name.top
+for name in $(cat concepts.txt); do
+
+	echo "Traitemenet de $name : "
+    bash test_top.sh val/ann/$name.ann out/color_$name.out > top/color_$name.top
 
 done
+
+cat val/top/color*.top > top/color_all.top
