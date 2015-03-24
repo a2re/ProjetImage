@@ -1,4 +1,6 @@
 #!/bin/bash
+
+
 for f in 'train' 'val'
 do
 	for name in $(cat concepts.txt); do

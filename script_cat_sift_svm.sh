@@ -5,5 +5,8 @@ do
 	rm -R $f/ssvm
 	mkdir $f/ssvm
 	echo "Concaténation des fichiers svm"
-	cat $f/hist/*.hist > $f/ssvm/sift.svm
+	for line in $(ls "$f/hist");do
+		cat $f/hist/$line >> $f/ssvm/sift.svm
+		echo "" >> $f/ssvm/sift.svm
+	done
 done
