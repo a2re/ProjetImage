@@ -2,12 +2,12 @@
 for f in 'train' 'val'
 do
 	echo "Création du dossier $f"
-	rm -R $f/hist
-	mkdir $f/hist
+	rm -R $f/ssvm
+	mkdir $f/ssvm
 
 	for sift in $(ls $f/sift/1nn/*.sift); do
 
-	    echo "Traitrement de $sift"
+	    echo "Traitrement de $sift pour la collection $f ..."
 
 		name=$( basename $sift )
 
@@ -18,16 +18,19 @@ do
 		for line in $(cat $sift); do
 			v[$line]=$((v[$line] + 1))
 		done
+		
+		echo -n "0" >> "$f/ssvm/sift.tmp"
 
-		output=$(echo $name | cut -d "." -f 1)
-		
-		echo -n "0" >> "$f/hist/$output.hist"
-		
+		lineNum=$( cat $sift | wc -l )
+
 		for i in `seq 0 256`; do
 			if [ $[v[$i]] -ne "0" ]
 			then
-				echo -n " $i:$[v[$i]]" >> "$f/hist/$output.hist"
+				val=$(echo "scale=6 ;$[v[$i]]/$lineNum" | bc)
+				echo -n " $i:0$val" >> "$f/ssvm/sift.svm"
 			fi
 		done
+
+		echo "" >> "$f/ssvm/sift.svm"
 	done
 done

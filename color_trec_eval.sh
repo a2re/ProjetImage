@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Traitement du fichier top :"
+echo "Traitement du fichier color_all.top :"
 ./libsvm/trec_eval -q -m map val/rel/all.rel top/color_all.top
 
 for name in $(cat concepts.txt); do
