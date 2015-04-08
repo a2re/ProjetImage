@@ -21,11 +21,19 @@ function fusion()
 	do
 		if read line1 <&$FD1; then
 			score1=$(echo $line1 | cut -d ' ' -f5)
+			if [[ $score1 == *"e-"* ]]
+			then 
+				score1="0"
+			fi
 		else
 			eof1=1
 		fi
 		if read line2 <&$FD2; then			
 			score2=$(echo $line2 | cut -d ' ' -f5)
+			if [[ $score2 == *"e-"* ]]
+			then 
+				score2="0"
+			fi
 			score=$(echo "scale=6 ; $score1+$score2" | bc ) 
 			score_fusion=$(echo "scale=6;$score/2" | bc ) 
 			line=$(echo $line2 | sed "s/ $score2 R//g")
@@ -41,5 +49,5 @@ for name in $(cat concepts.txt); do
 	fusion top/color_$name.top sift_top/sift_$name.top >> fusion_top/fusion_$name.top	
 done 
 
-
+#fusion top/color_cat.top sift_top/sift_cat.top
 
