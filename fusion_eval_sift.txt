@@ -1,0 +1,102 @@
+Traitement du fichier top :
+map                   	aeroplane	0.3662
+map                   	bicycle	0.0694
+map                   	bird	0.1776
+map                   	boat	0.1729
+map                   	bottle	0.0859
+map                   	bus	0.0703
+map                   	car	0.1702
+map                   	cat	0.1601
+map                   	chair	0.1533
+map                   	cow	0.0665
+map                   	diningtable	0.0976
+map                   	dog	0.1614
+map                   	horse	0.0652
+map                   	motorbike	0.0550
+map                   	person	0.3648
+map                   	pottedplant	0.0581
+map                   	sheep	0.1319
+map                   	sofa	0.0769
+map                   	train	0.0852
+map                   	tvmonitor	0.0784
+map                   	all	0.1333
+Traitement de aeroplane: 
+map                   	aeroplane	0.3662
+map                   	all	0.3662
+
+Traitement de bicycle: 
+map                   	bicycle	0.0694
+map                   	all	0.0694
+
+Traitement de bird: 
+map                   	bird	0.1776
+map                   	all	0.1776
+
+Traitement de boat: 
+map                   	boat	0.1729
+map                   	all	0.1729
+
+Traitement de bottle: 
+map                   	bottle	0.0859
+map                   	all	0.0859
+
+Traitement de bus: 
+map                   	bus	0.0703
+map                   	all	0.0703
+
+Traitement de car: 
+map                   	car	0.1702
+map                   	all	0.1702
+
+Traitement de cat: 
+map                   	cat	0.1601
+map                   	all	0.1601
+
+Traitement de chair: 
+map                   	chair	0.1533
+map                   	all	0.1533
+
+Traitement de cow: 
+map                   	cow	0.0665
+map                   	all	0.0665
+
+Traitement de diningtable: 
+map                   	diningtable	0.0976
+map                   	all	0.0976
+
+Traitement de dog: 
+map                   	dog	0.1614
+map                   	all	0.1614
+
+Traitement de horse: 
+map                   	horse	0.0652
+map                   	all	0.0652
+
+Traitement de motorbike: 
+map                   	motorbike	0.0550
+map                   	all	0.0550
+
+Traitement de person: 
+map                   	person	0.3648
+map                   	all	0.3648
+
+Traitement de pottedplant: 
+map                   	pottedplant	0.0581
+map                   	all	0.0581
+
+Traitement de sheep: 
+map                   	sheep	0.1319
+map                   	all	0.1319
+
+Traitement de sofa: 
+map                   	sofa	0.0769
+map                   	all	0.0769
+
+Traitement de train: 
+map                   	train	0.0852
+map                   	all	0.0852
+
+Traitement de tvmonitor: 
+map                   	tvmonitor	0.0784
+map                   	all	0.0784
+

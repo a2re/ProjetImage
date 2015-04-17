@@ -19,7 +19,7 @@ do
 			v[$line]=$((v[$line] + 1))
 		done
 		
-		echo -n "0" >> "$f/ssvm/sift.tmp"
+		echo -n "0" >> "$f/ssvm/sift.svm"
 
 		lineNum=$( cat $sift | wc -l )
 
